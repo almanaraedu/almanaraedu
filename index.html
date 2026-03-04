@@ -11,8 +11,8 @@ body{
 font-family:Arial;
 margin:0;
 background:#f4f6f9;
-text-align:center;
 direction:rtl;
+text-align:center;
 }
 
 header{
@@ -21,8 +21,8 @@ color:white;
 padding:25px;
 }
 
-section{
-padding:40px;
+h2{
+margin-top:40px;
 }
 
 .cards{
@@ -30,32 +30,37 @@ display:flex;
 justify-content:center;
 gap:20px;
 flex-wrap:wrap;
+margin-top:30px;
 }
 
 .card{
 background:white;
 padding:25px;
 border-radius:12px;
-width:220px;
+width:250px;
 box-shadow:0 0 10px rgba(0,0,0,0.1);
-font-size:18px;
+font-size:20px;
+cursor:pointer;
+}
+
+.card:hover{
+transform:scale(1.03);
 }
 
 footer{
-background:#0d47a1;
-color:white;
+margin-top:60px;
 padding:20px;
-margin-top:40px;
+color:#555;
 }
 
-/* زرار القائمة */
+/* القائمة الجانبية */
 
 .menu-btn{
 position:fixed;
 top:20px;
 left:20px;
-font-size:30px;
-background:#0056b3;
+font-size:28px;
+background:#0d47a1;
 color:white;
 border:none;
 padding:10px 15px;
@@ -64,13 +69,11 @@ cursor:pointer;
 z-index:1000;
 }
 
-/* القائمة الجانبية */
-
 .side-menu{
 position:fixed;
-left:-250px;
+left:-260px;
 top:0;
-width:250px;
+width:260px;
 height:100%;
 background:#1e4fa3;
 padding-top:60px;
@@ -89,7 +92,7 @@ font-size:18px;
 background:#0d3b82;
 }
 
-/* زر واتساب */
+/* واتساب */
 
 .whatsapp{
 position:fixed;
@@ -111,7 +114,6 @@ box-shadow:0 4px 10px rgba(0,0,0,0.3);
 
 <header>
 <h1>معهد المنارة التعليمي</h1>
-<h3>Al Manara Educational Institute</h3>
 </header>
 
 <button class="menu-btn" onclick="openMenu()">☰</button>
@@ -122,13 +124,27 @@ box-shadow:0 4px 10px rgba(0,0,0,0.3);
 
 <a href="#levels">المراحل التعليمية</a>
 
-<a href="#videos">الفيديوهات</a>
-
-<a href="#register">التسجيل</a>
-
 <a href="#contact">تواصل معنا</a>
 
 </div>
+
+<section>
+
+<h2>اختر نوع المدرسة</h2>
+
+<div class="cards">
+
+<div class="card">
+🏫 المدارس الحكومية
+</div>
+
+<div class="card">
+🎓 Private Schools
+</div>
+
+</div>
+
+</section>
 
 <section id="about">
 
@@ -177,26 +193,6 @@ University
 
 </section>
 
-<section id="videos">
-
-<h2>فيديوهات تعليمية</h2>
-
-<p>سيتم إضافة الفيديوهات التعليمية هنا.</p>
-
-</section>
-
-<section id="register">
-
-<h2>تسجيل الطلاب</h2>
-
-<input placeholder="الاسم"><br><br>
-
-<input placeholder="رقم الهاتف"><br><br>
-
-<button>تسجيل</button>
-
-</section>
-
 <section id="contact">
 
 <h2>تواصل معنا</h2>
@@ -224,13 +220,9 @@ function openMenu(){
 let menu=document.getElementById("sideMenu");
 
 if(menu.style.left=="0px"){
-
-menu.style.left="-250px";
-
+menu.style.left="-260px";
 }else{
-
 menu.style.left="0px";
-
 }
 
 }
