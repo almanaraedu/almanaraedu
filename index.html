@@ -54,15 +54,6 @@ width:220px;
 box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
-.whatsapp{
-background:#25D366;
-color:white;
-padding:15px 25px;
-border-radius:8px;
-text-decoration:none;
-font-size:18px;
-}
-
 input,select{
 padding:10px;
 margin:10px;
@@ -82,6 +73,71 @@ background:#0d47a1;
 color:white;
 padding:20px;
 text-align:center;
+}
+
+/* زر القائمة */
+
+.menu-btn{
+position:fixed;
+top:20px;
+right:20px;
+font-size:30px;
+background:#0056b3;
+color:white;
+border:none;
+padding:10px 15px;
+border-radius:5px;
+cursor:pointer;
+z-index:1000;
+}
+
+/* القائمة الجانبية */
+
+.side-menu{
+position:fixed;
+right:-250px;
+top:0;
+width:250px;
+height:100%;
+background:#1e4fa3;
+padding-top:60px;
+transition:0.3s;
+}
+
+.side-menu a{
+display:block;
+color:white;
+padding:15px;
+text-decoration:none;
+font-size:18px;
+}
+
+.side-menu a:hover{
+background:#0d3b82;
+}
+
+/* زر واتساب العائم */
+
+.whatsapp-float{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+font-size:30px;
+padding:15px;
+border-radius:50%;
+text-decoration:none;
+box-shadow:0 4px 10px rgba(0,0,0,0.3);
+}
+
+.whatsapp-btn{
+background:#25D366;
+color:white;
+padding:15px 25px;
+border-radius:8px;
+text-decoration:none;
+font-size:18px;
 }
 
 </style>
@@ -119,7 +175,7 @@ High quality educational services for all academic levels.
 
 <br>
 
-<a class="whatsapp" href="https://wa.me/96551693563">
+<a class="whatsapp-btn" href="https://wa.me/96551693563">
 احجز حصتك الآن عبر واتساب
 </a>
 
@@ -132,11 +188,8 @@ High quality educational services for all academic levels.
 <div class="cards">
 
 <div class="card">ابتدائي<br>Primary</div>
-
 <div class="card">متوسط<br>Intermediate</div>
-
 <div class="card">ثانوي<br>Secondary</div>
-
 <div class="card">جامعات<br>University</div>
 
 </div>
@@ -188,21 +241,14 @@ src="https://www.youtube.com/embed/VIDEOID">
 <h2>تسجيل الطلاب</h2>
 
 <input placeholder="الاسم / Name"><br>
-
 <input placeholder="رقم الهاتف / Phone"><br>
 
 <select>
-
 <option>المرحلة الدراسية</option>
-
 <option>ابتدائي</option>
-
 <option>متوسط</option>
-
 <option>ثانوي</option>
-
 <option>جامعة</option>
-
 </select>
 
 <br>
@@ -216,20 +262,52 @@ src="https://www.youtube.com/embed/VIDEOID">
 <h2>تواصل معنا</h2>
 
 <p>📞 +965 51693563</p>
-
 <p>📍 Kuwait</p>
 
-<a class="whatsapp" href="https://wa.me/96551693563">
+<a class="whatsapp-btn" href="https://wa.me/96551693563">
 WhatsApp
 </a>
 
 </section>
 
 <footer>
-
 © Al Manara Educational Institute
-
 </footer>
+
+<!-- زر القائمة -->
+
+<button class="menu-btn" onclick="openMenu()">☰</button>
+
+<div id="sideMenu" class="side-menu">
+<a href="#home">الرئيسية</a>
+<a href="#levels">المراحل</a>
+<a href="#subjects">المواد</a>
+<a href="#teachers">المدرسين</a>
+<a href="#register">التسجيل</a>
+<a href="#videos">فيديوهات</a>
+<a href="#contact">تواصل معنا</a>
+</div>
+
+<!-- زر واتساب العائم -->
+
+<a href="https://wa.me/96551693563" class="whatsapp-float">
+💬
+</a>
+
+<script>
+
+function openMenu(){
+let menu=document.getElementById("sideMenu");
+
+if(menu.style.right==="0px"){
+menu.style.right="-250px";
+}else{
+menu.style.right="0px";
+}
+
+}
+
+</script>
 
 </body>
 </html>
