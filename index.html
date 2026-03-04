@@ -1,77 +1,95 @@
-<!DOCTYPE html><html lang="ar">
+<!DOCTYPE html>
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>معهد المنارة التعليمي</title><style>
+<title>معهد المنارة التعليمي</title>
+
+<style>
 
 body{
-margin:0;
 font-family:Arial;
-background:#f4f6fb;
+margin:0;
+background:#f4f6f9;
+text-align:center;
+direction:rtl;
 }
 
 header{
 background:#0d47a1;
 color:white;
-padding:30px;
-text-align:center;
+padding:25px;
 }
 
-header h1{
-margin:0;
-font-size:32px;
-}
-
-.container{
-padding:40px 20px;
-text-align:center;
-}
-
-.title{
-font-size:28px;
-margin-bottom:30px;
-color:#333;
+section{
+padding:40px;
 }
 
 .cards{
 display:flex;
-flex-wrap:wrap;
 justify-content:center;
-gap:25px;
+gap:20px;
+flex-wrap:wrap;
 }
 
 .card{
 background:white;
-width:220px;
-padding:30px;
+padding:25px;
 border-radius:12px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
+width:220px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+font-size:18px;
+}
+
+footer{
+background:#0d47a1;
+color:white;
+padding:20px;
+margin-top:40px;
+}
+
+/* زرار القائمة */
+
+.menu-btn{
+position:fixed;
+top:20px;
+left:20px;
+font-size:30px;
+background:#0056b3;
+color:white;
+border:none;
+padding:10px 15px;
+border-radius:6px;
 cursor:pointer;
-font-size:20px;
-font-weight:bold;
+z-index:1000;
+}
+
+/* القائمة الجانبية */
+
+.side-menu{
+position:fixed;
+left:-250px;
+top:0;
+width:250px;
+height:100%;
+background:#1e4fa3;
+padding-top:60px;
 transition:0.3s;
 }
 
-.card:hover{
-transform:translateY(-5px);
-box-shadow:0 10px 20px rgba(0,0,0,0.15);
-background:#eef4ff;
-}
-
-button{
-padding:15px 25px;
-margin:15px;
-font-size:18px;
-background:#0d47a1;
+.side-menu a{
+display:block;
 color:white;
-border:none;
-border-radius:8px;
-cursor:pointer;
+padding:15px;
+text-decoration:none;
+font-size:18px;
 }
 
-button:hover{
-background:#1565c0;
+.side-menu a:hover{
+background:#0d3b82;
 }
+
+/* زر واتساب */
 
 .whatsapp{
 position:fixed;
@@ -83,219 +101,141 @@ font-size:28px;
 padding:15px;
 border-radius:50%;
 text-decoration:none;
-box-shadow:0 4px 12px rgba(0,0,0,0.3);
+box-shadow:0 4px 10px rgba(0,0,0,0.3);
 }
 
-footer{
-margin-top:40px;
-padding:20px;
-text-align:center;
-color:#555;
-}
+</style>
+</head>
 
-</style></head><body><header>
+<body>
+
+<header>
 <h1>معهد المنارة التعليمي</h1>
-</header><div class="container" id="content"><div class="title">اختر نوع المدرسة</div><div class="cards"><div class="card" onclick="gov()">🏫 المدارس الحكومية</div><div class="card" onclick="privateSchool()">🎓 Private Schools</div></div></div><a class="whatsapp" href="https://wa.me/96551693563">💬</a>
+<h3>Al Manara Educational Institute</h3>
+</header>
+
+<button class="menu-btn" onclick="openMenu()">☰</button>
+
+<div id="sideMenu" class="side-menu">
+
+<a href="#about">عن المعهد</a>
+
+<a href="#levels">المراحل التعليمية</a>
+
+<a href="#videos">الفيديوهات</a>
+
+<a href="#register">التسجيل</a>
+
+<a href="#contact">تواصل معنا</a>
+
+</div>
+
+<section id="about">
+
+<h2>عن المعهد</h2>
+
+<p>
+
+معهد المنارة التعليمي يقدم خدمات تعليمية لجميع المراحل الدراسية  
+من الابتدائي حتى المرحلة الجامعية بأفضل المدرسين.
+
+</p>
+
+</section>
+
+<section id="levels">
+
+<h2>المراحل التعليمية</h2>
+
+<div class="cards">
+
+<div class="card">
+ابتدائي
+<br>
+Primary
+</div>
+
+<div class="card">
+متوسط
+<br>
+Intermediate
+</div>
+
+<div class="card">
+ثانوي
+<br>
+Secondary
+</div>
+
+<div class="card">
+جامعات
+<br>
+University
+</div>
+
+</div>
+
+</section>
+
+<section id="videos">
+
+<h2>فيديوهات تعليمية</h2>
+
+<p>سيتم إضافة الفيديوهات التعليمية هنا.</p>
+
+</section>
+
+<section id="register">
+
+<h2>تسجيل الطلاب</h2>
+
+<input placeholder="الاسم"><br><br>
+
+<input placeholder="رقم الهاتف"><br><br>
+
+<button>تسجيل</button>
+
+</section>
+
+<section id="contact">
+
+<h2>تواصل معنا</h2>
+
+<p>📞 96551693563+</p>
+
+<p>📍 الكويت</p>
+
+</section>
 
 <footer>
+
 © Al Manara Educational Institute
-</footer><script>
 
-function gov(){
+</footer>
 
-document.getElementById("content").innerHTML = `
+<a href="https://wa.me/96551693563" class="whatsapp">
+💬
+</a>
 
-<div class="title">المراحل التعليمية</div>
+<script>
 
-<div class="cards">
+function openMenu(){
 
-<div class="card" onclick="primary()">ابتدائي</div>
+let menu=document.getElementById("sideMenu");
 
-<div class="card" onclick="middle()">إعدادي</div>
+if(menu.style.left=="0px"){
 
-<div class="card" onclick="secondary()">ثانوي</div>
+menu.style.left="-250px";
 
-</div>
+}else{
 
-`;
-
-}
-
-function privateSchool(){
-
-let grades="";
-
-for(let i=1;i<=12;i++){
-
-grades += `<div class="card" onclick="term('Grade ${i}')">Grade ${i}</div>`;
+menu.style.left="0px";
 
 }
 
-document.getElementById("content").innerHTML = `
-
-<div class="title">Choose Grade</div>
-
-<div class="cards">
-
-${grades}
-
-</div>
-
-`;
-
 }
 
-function primary(){
+</script>
 
-document.getElementById("content").innerHTML = `
-
-<div class="title">المرحلة الابتدائية</div>
-
-<div class="cards">
-
-<div class="card" onclick="term('الصف الأول')">الصف الأول</div>
-
-<div class="card" onclick="term('الصف الثاني')">الصف الثاني</div>
-
-<div class="card" onclick="term('الصف الثالث')">الصف الثالث</div>
-
-<div class="card" onclick="term('الصف الرابع')">الصف الرابع</div>
-
-<div class="card" onclick="term('الصف الخامس')">الصف الخامس</div>
-
-</div>
-
-`;
-
-}
-
-function middle(){
-
-document.getElementById("content").innerHTML = `
-
-<div class="title">المرحلة الإعدادية</div>
-
-<div class="cards">
-
-<div class="card" onclick="term('الصف السادس')">الصف السادس</div>
-
-<div class="card" onclick="term('الصف السابع')">الصف السابع</div>
-
-<div class="card" onclick="term('الصف الثامن')">الصف الثامن</div>
-
-<div class="card" onclick="term('الصف التاسع')">الصف التاسع</div>
-
-</div>
-
-`;
-
-}
-
-function secondary(){
-
-document.getElementById("content").innerHTML = `
-
-<div class="title">المرحلة الثانوية</div>
-
-<div class="cards">
-
-<div class="card" onclick="term('الصف العاشر')">الصف العاشر</div>
-
-<div class="card" onclick="term('الصف الحادي عشر')">الصف الحادي عشر</div>
-
-<div class="card" onclick="term('الصف الثاني عشر')">الصف الثاني عشر</div>
-
-</div>
-
-`;
-
-}
-
-function term(grade){
-
-document.getElementById("content").innerHTML = `
-
-<div class="title">${grade}</div>
-
-<div class="cards">
-
-<div class="card" onclick="subjects('${grade}','الفصل الأول')">الفصل الدراسي الأول</div>
-
-<div class="card" onclick="subjects('${grade}','الفصل الثاني')">الفصل الدراسي الثاني</div>
-
-</div>
-
-`;
-
-}
-
-function subjects(grade,term){
-
-let subjects=[
-
-"عربي",
-"English",
-"رياضيات",
-"Science",
-"Social Studies",
-"Computer",
-"Islamic"
-
-];
-
-let html="";
-
-subjects.forEach(s=>{
-
-html+=`<div class="card" onclick="subject('${grade}','${s}')">${s}</div>`;
-
-});
-
-document.getElementById("content").innerHTML = `
-
-<div class="title">${grade} - ${term}</div>
-
-<div class="cards">
-
-${html}
-
-</div>
-
-`;
-
-}
-
-function subject(grade,subject){
-
-document.getElementById("content").innerHTML = `
-
-<div class="title">${subject}</div>
-
-<button onclick="book('${grade}','${subject}')">حجز مع المدرس</button>
-
-<button onclick="videos()">فيديوهات شرح</button>
-
-`;
-
-}
-
-function book(grade,subject){
-
-let msg=`مرحبا، أريد حجز حصة
-
-الصف: ${grade}
-
-المادة: ${subject}`;
-
-window.open("https://wa.me/96551693563?text="+encodeURIComponent(msg));
-
-}
-
-function videos(){
-
-alert("يمكن إضافة فيديوهات الشرح هنا");
-
-}
-
-</script></body>
+</body>
 </html>
