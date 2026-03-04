@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Al Manara Educational Institute</title>
+<title>معهد المنارة التعليمي</title>
 
 <style>
 
@@ -11,225 +11,203 @@ body{
 font-family:Arial;
 margin:0;
 background:#f4f6f9;
+text-align:center;
+direction:rtl;
 }
 
 header{
-background:#0d47a1;
+background:#1e4fa3;
 color:white;
 padding:25px;
-text-align:center;
-}
-
-nav{
-background:#1565c0;
-padding:12px;
-text-align:center;
-}
-
-nav a{
-color:white;
-margin:15px;
-text-decoration:none;
-font-weight:bold;
-font-size:16px;
+font-size:26px;
 }
 
 section{
-padding:50px;
-text-align:center;
+padding:40px;
 }
 
 .cards{
 display:flex;
-justify-content:center;
+flex-direction:column;
+align-items:center;
 gap:20px;
-flex-wrap:wrap;
 }
 
 .card{
 background:white;
 padding:25px;
-border-radius:10px;
-width:220px;
+border-radius:15px;
+width:280px;
 box-shadow:0 0 10px rgba(0,0,0,0.1);
+font-size:20px;
+cursor:pointer;
 }
 
-.whatsapp{
-background:#25D366;
+.card:hover{
+background:#eef2ff;
+}
+
+.menu-btn{
+position:fixed;
+top:20px;
+left:20px;
+font-size:25px;
+background:#1e4fa3;
 color:white;
-padding:15px 25px;
-border-radius:8px;
+border:none;
+padding:10px 15px;
+border-radius:6px;
+cursor:pointer;
+}
+
+.side-menu{
+position:fixed;
+left:-250px;
+top:0;
+width:250px;
+height:100%;
+background:#1e4fa3;
+padding-top:60px;
+transition:0.3s;
+}
+
+.side-menu a{
+display:block;
+color:white;
+padding:15px;
 text-decoration:none;
 font-size:18px;
 }
 
-input,select{
-padding:10px;
-margin:10px;
-width:250px;
+.side-menu a:hover{
+background:#163c80;
 }
 
-button{
-padding:12px 25px;
-background:#0d47a1;
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
 color:white;
-border:none;
-border-radius:6px;
-}
-
-footer{
-background:#0d47a1;
-color:white;
-padding:20px;
-text-align:center;
+font-size:30px;
+padding:15px;
+border-radius:50%;
+text-decoration:none;
 }
 
 </style>
+
 </head>
 
 <body>
 
 <header>
-<h1>معهد المنارة التعليمي</h1>
-<h2>Al Manara Educational Institute</h2>
+معهد المنارة التعليمي
 </header>
 
-<nav>
-<a href="#home">الرئيسية</a>
-<a href="#levels">المراحل</a>
-<a href="#subjects">المواد</a>
-<a href="#teachers">المدرسين</a>
-<a href="#videos">فيديوهات</a>
-<a href="#register">التسجيل</a>
-<a href="#contact">تواصل معنا</a>
-</nav>
+<button class="menu-btn" onclick="openMenu()">☰</button>
 
-<section id="home">
+<div id="sideMenu" class="side-menu">
 
-<h2>مرحبا بكم في معهد المنارة</h2>
+<a onclick="home()">الرئيسية</a>
 
-<p>
-نقدم خدمات تعليمية لجميع المراحل مع أفضل المدرسين.
-</p>
+<a onclick="school()">المراحل المدرسية</a>
 
-<p>
-Welcome to Al Manara Educational Institute.
-High quality educational services for all academic levels.
-</p>
+<a onclick="university()">المرحلة الجامعية</a>
 
-<br>
+<a href="https://wa.me/96551693563">تواصل معنا</a>
 
-<a class="whatsapp" href="https://wa.me/96551693563">
-احجز حصتك الآن عبر واتساب
-</a>
+</div>
 
-</section>
+<section id="content">
 
-<section id="levels">
-
-<h2>المراحل التعليمية</h2>
+<h2>اختر القسم</h2>
 
 <div class="cards">
 
-<div class="card">ابتدائي<br>Primary</div>
+<div class="card" onclick="school()">
+📚 المراحل المدرسية
+</div>
 
-<div class="card">متوسط<br>Intermediate</div>
-
-<div class="card">ثانوي<br>Secondary</div>
-
-<div class="card">جامعات<br>University</div>
+<div class="card" onclick="university()">
+🎓 المرحلة الجامعية
+</div>
 
 </div>
 
 </section>
 
-<section id="subjects">
+<a href="https://wa.me/96551693563" class="whatsapp">💬</a>
 
-<h2>المواد الدراسية</h2>
+<script>
 
-<p>
-يمكنك إضافة المواد التي يقدمها المعهد هنا.
-</p>
+function openMenu(){
+let menu=document.getElementById("sideMenu");
 
-</section>
+if(menu.style.left=="0px"){
+menu.style.left="-250px";
+}else{
+menu.style.left="0px";
+}
+}
 
-<section id="teachers">
+function home(){
 
-<h2>المدرسين</h2>
+document.getElementById("content").innerHTML=
+
+`
+<h2>اختر القسم</h2>
 
 <div class="cards">
 
-<div class="card">
-اسم المدرس<br>
-Math Teacher
-</div>
+<div class="card" onclick="school()">📚 المراحل المدرسية</div>
 
-<div class="card">
-اسم المدرس<br>
-Physics Teacher
-</div>
+<div class="card" onclick="university()">🎓 المرحلة الجامعية</div>
 
 </div>
+`;
 
-</section>
+}
 
-<section id="videos">
+function school(){
 
-<h2>فيديوهات تعليمية</h2>
+document.getElementById("content").innerHTML=
 
-<iframe width="350" height="200"
-src="https://www.youtube.com/embed/VIDEOID">
-</iframe>
+`
+<h2>اختر نوع المدرسة</h2>
 
-</section>
+<div class="cards">
 
-<section id="register">
+<div class="card">🏫 المدارس الحكومية</div>
 
-<h2>تسجيل الطلاب</h2>
+<div class="card">🎓 Private Schools</div>
 
-<input placeholder="الاسم / Name"><br>
+</div>
+`;
 
-<input placeholder="رقم الهاتف / Phone"><br>
+}
 
-<select>
+function university(){
 
-<option>المرحلة الدراسية</option>
+document.getElementById("content").innerHTML=
 
-<option>ابتدائي</option>
+`
+<h2>المرحلة الجامعية</h2>
 
-<option>متوسط</option>
+<div class="cards">
 
-<option>ثانوي</option>
+<div class="card">التطبيقي</div>
 
-<option>جامعة</option>
+<div class="card">جامعة الكويت</div>
 
-</select>
+<div class="card">الجامعة الاسترالية</div>
 
-<br>
+</div>
+`;
 
-<button>إرسال</button>
+}
 
-</section>
-
-<section id="contact">
-
-<h2>تواصل معنا</h2>
-
-<p>📞 +965 51693563</p>
-
-<p>📍 Kuwait</p>
-
-<a class="whatsapp" href="https://wa.me/96551693563">
-WhatsApp
-</a>
-
-</section>
-
-<footer>
-
-© Al Manara Educational Institute
-
-</footer>
+</script>
 
 </body>
 </html>
