@@ -1,9 +1,12 @@
 <!DOCTYPE html>
+
+
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>معهد المنارة التعليمي</title>
+
 
 <style>
 
@@ -21,10 +24,6 @@ color:white;
 padding:25px;
 }
 
-h2{
-margin-top:40px;
-}
-
 .cards{
 display:flex;
 justify-content:center;
@@ -37,23 +36,15 @@ margin-top:30px;
 background:white;
 padding:25px;
 border-radius:12px;
-width:250px;
+width:220px;
 box-shadow:0 0 10px rgba(0,0,0,0.1);
-font-size:20px;
+font-size:18px;
 cursor:pointer;
 }
 
 .card:hover{
-transform:scale(1.03);
+transform:scale(1.05);
 }
-
-footer{
-margin-top:60px;
-padding:20px;
-color:#555;
-}
-
-/* القائمة الجانبية */
 
 .menu-btn{
 position:fixed;
@@ -92,8 +83,6 @@ font-size:18px;
 background:#0d3b82;
 }
 
-/* واتساب */
-
 .whatsapp{
 position:fixed;
 bottom:20px;
@@ -108,110 +97,60 @@ box-shadow:0 4px 10px rgba(0,0,0,0.3);
 }
 
 </style>
+
+
 </head>
 
+
 <body>
+
 
 <header>
 <h1>معهد المنارة التعليمي</h1>
 </header>
 
-<button class="menu-btn" onclick="openMenu()">☰</button>
+
+☰
 
 <div id="sideMenu" class="side-menu">
 
-<a href="#about">عن المعهد</a>
 
-<a href="#levels">المراحل التعليمية</a>
-
-<a href="#contact">تواصل معنا</a>
+الرئيسية
+المراحل المدرسية
+المرحلة الجامعية
 
 </div>
 
-<section>
 
-<h2>اختر نوع المدرسة</h2>
+<div id="content">
+
+
+<h2>اختر القسم</h2>
+
 
 <div class="cards">
 
-<div class="card">
-🏫 المدارس الحكومية
+
+<div class="card" onclick="school()">
+📚 المراحل المدرسية
 </div>
 
-<div class="card">
-🎓 Private Schools
+
+<div class="card" onclick="university()">
+🎓 المرحلة الجامعية
 </div>
 
-</div>
-
-</section>
-
-<section id="about">
-
-<h2>عن المعهد</h2>
-
-<p>
-
-معهد المنارة التعليمي يقدم خدمات تعليمية لجميع المراحل الدراسية  
-من الابتدائي حتى المرحلة الجامعية بأفضل المدرسين.
-
-</p>
-
-</section>
-
-<section id="levels">
-
-<h2>المراحل التعليمية</h2>
-
-<div class="cards">
-
-<div class="card">
-ابتدائي
-<br>
-Primary
-</div>
-
-<div class="card">
-متوسط
-<br>
-Intermediate
-</div>
-
-<div class="card">
-ثانوي
-<br>
-Secondary
-</div>
-
-<div class="card">
-جامعات
-<br>
-University
-</div>
 
 </div>
 
-</section>
 
-<section id="contact">
+</div>
 
-<h2>تواصل معنا</h2>
-
-<p>📞 96551693563+</p>
-
-<p>📍 الكويت</p>
-
-</section>
-
-<footer>
-
-© Al Manara Educational Institute
-
-</footer>
 
 <a href="https://wa.me/96551693563" class="whatsapp">
 💬
 </a>
+
 
 <script>
 
@@ -227,7 +166,187 @@ menu.style.left="0px";
 
 }
 
+function home(){
+location.reload();
+}
+
+function school(){
+
+document.getElementById("content").innerHTML=`
+
+<h2>نوع المدارس</h2>
+
+<div class="cards">
+
+<div class="card" onclick="grades()">
+🏫 مدارس حكومية
+</div>
+
+<div class="card" onclick="grades()">
+🎓 مدارس خاصة
+</div>
+
+</div>
+
+`;
+
+}
+
+function grades(){
+
+let html="";
+
+for(let i=1;i<=12;i++){
+
+html+=`<div class="card" onclick="term('الصف ${i}')">
+الصف ${i}
+</div>`;
+
+}
+
+document.getElementById("content").innerHTML=`
+
+<h2>الصفوف</h2>
+
+<div class="cards">
+
+${html}
+
+</div>
+
+`;
+
+}
+
+function term(grade){
+
+document.getElementById("content").innerHTML=`
+
+<h2>${grade}</h2>
+
+<div class="cards">
+
+<div class="card" onclick="subjects('${grade}','الفصل الأول')">
+الفصل الدراسي الأول
+</div>
+
+<div class="card" onclick="subjects('${grade}','الفصل الثاني')">
+الفصل الدراسي الثاني
+</div>
+
+</div>
+
+`;
+
+}
+
+function subjects(grade,term){
+
+let list=[
+
+"عربي",
+"English",
+"رياضيات",
+"Science",
+"Social Studies",
+"Computer",
+"Islamic"
+
+];
+
+let html="";
+
+list.forEach(s=>{
+
+html+=`<div class="card" onclick="subject('${grade}','${s}')">
+${s}
+</div>`;
+
+});
+
+document.getElementById("content").innerHTML=`
+
+<h2>${grade} - ${term}</h2>
+
+<div class="cards">
+
+${html}
+
+</div>
+
+`;
+
+}
+
+function subject(grade,subject){
+
+document.getElementById("content").innerHTML=`
+
+<h2>${subject}</h2>
+
+<div class="cards">
+
+<div class="card" onclick="book('${grade}','${subject}')">
+👨‍🏫 حجز مع المدرس
+</div>
+
+<div class="card" onclick="videos()">
+🎥 فيديوهات شرح
+</div>
+
+</div>
+
+`;
+
+}
+
+function book(grade,subject){
+
+let msg=\`مرحبا أريد حجز حصة
+
+الصف: \${grade}
+
+المادة: \${subject}\`;
+
+window.open("https://wa.me/96551693563?text="+encodeURIComponent(msg));
+
+}
+
+function videos(){
+
+alert("يمكن إضافة فيديوهات الشرح هنا");
+
+}
+
+function university(){
+
+document.getElementById("content").innerHTML=`
+
+<h2>المرحلة الجامعية</h2>
+
+<div class="cards">
+
+<div class="card">
+التطبيقي
+</div>
+
+<div class="card">
+جامعة الكويت
+</div>
+
+<div class="card">
+الجامعة الأسترالية
+</div>
+
+</div>
+
+`;
+
+}
+
 </script>
+
 
 </body>
 </html>
+:::
