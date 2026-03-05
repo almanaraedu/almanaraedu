@@ -1,7 +1,10 @@
-<!DOCTYPE html><html lang="ar"><head>
+<!DOCTYPE html><html lang="ar">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>معهد المنارة التعليمي</title><style>body{
+<title>معهد المنارة التعليمي</title><style>
+
+body{
 font-family:Arial;
 margin:0;
 background:#f4f6f9;
@@ -17,7 +20,7 @@ padding:25px;
 
 .logo{
 width:100%;
-  max-width:500px;
+max-width:500px;
 margin-bottom:10px;
 }
 
@@ -83,7 +86,6 @@ border-radius:50%;
 text-decoration:none;
 }
 
-/* أزرار التنقل */
 .nav{
 position:fixed;
 top:15px;
@@ -104,14 +106,14 @@ font-size:14px;
 </style></head><body><div class="nav">
 <span onclick="goBack()">⬅ رجوع</span>
 <span onclick="home()">🏠 الرئيسية</span>
-
 </div><header>
 <img src="logo.png" class="logo">
 <h1>معهد المنارة التعليمي</h1>
-  <p style="margin-top:10px;font-size:18px;color:white">
+<p style="margin-top:10px;font-size:18px;color:white">
 ✨ نضيء طريق التفوق
-  </p>
-</header><section id="content"><div class="about"><h2>نبذة عن المعهد</h2><p>
+</p>
+</header><section id="content"><div class="about">
+<h2>نبذة عن المعهد</h2><p>
 معهد المنارة التعليمي يقدم دروس تقوية لجميع المراحل الدراسية
 من الصف الأول حتى المرحلة الجامعية.
 </p><p>
@@ -125,7 +127,9 @@ font-size:14px;
 📚 المراحل المدرسية
 </div><div class="card" onclick="university()">
 🎓 المرحلة الجامعية
-</div></div></section><a href="https://wa.me/96551693563" class="whatsapp">💬</a><script>
+</div></div></section><a href="https://wa.me/96551693563" class="whatsapp">💬</a>
+
+<script>
 
 function home(){
 location.reload()
@@ -143,11 +147,8 @@ document.getElementById("content").innerHTML=
 <h2>تسجيل طالب</h2>
 
 <input id="name" placeholder="اسم الطالب"><br>
-
 <input id="grade" placeholder="الصف الدراسي"><br>
-
 <input id="subject" placeholder="المادة"><br>
-
 <input id="phone" placeholder="رقم الهاتف"><br>
 
 <div class="btn" onclick="send()">إرسال الطلب</div>
@@ -317,7 +318,7 @@ html+=`
 👨‍🏫 حجز حصة
 </a>
 
-<a class="btn" onclick="playVideo('https://www.youtube.com/embed/dQw4w9WgXcQ')">
+<a class="btn" onclick="loadVideos()">
 🎥 مشاهدة فيديو
 </a>
 
@@ -328,37 +329,11 @@ html+=`
 })
 
 html+=`</div>
-
 <br>
-
 <div class="btn" onclick="semester('${grade}')">⬅ رجوع</div>
 `
 
 document.getElementById("content").innerHTML=html
-
-}
-
-function playVideo(url){
-
-document.getElementById("content").innerHTML=
-
-`
-<h2>فيديو الشرح</h2>
-
-<div style="padding:20px">
-
-<iframe width="100%" height="300"
-src="${url}"
-frameborder="0"
-allowfullscreen>
-</iframe>
-
-<br><br>
-
-<div class="btn" onclick="home()">🏠 الصفحة الرئيسية</div>
-
-</div>
-`
 
 }
 
@@ -372,9 +347,7 @@ document.getElementById("content").innerHTML=
 <div class="cards">
 
 <div class="card">التطبيقي</div>
-
 <div class="card">جامعة الكويت</div>
-
 <div class="card">الجامعة الاسترالية</div>
 
 </div>
@@ -386,4 +359,57 @@ document.getElementById("content").innerHTML=
 
 }
 
-</script></body></html>
+</script><script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyAwWwFCuLQDCnWgSzqYqUrZZrXywN88MFg",
+authDomain: "almanara-edu.firebaseapp.com",
+projectId: "almanara-edu",
+storageBucket: "almanara-edu.firebasestorage.app",
+messagingSenderId: "755423201331",
+appId: "1:755423201331:web:957e58dcccc796d8513b46",
+measurementId: "G-JK6QPGCJRE"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.loadVideos = async function(){
+
+const querySnapshot = await getDocs(collection(db,"Videos"));
+
+let html="<h2>فيديوهات الشرح</h2><div class='cards'>";
+
+querySnapshot.forEach((doc)=>{
+
+const data=doc.data();
+
+html+=`
+
+<div class="card">
+
+<h3>${data.Title}</h3>
+
+<iframe width="100%" height="200"
+src="${data.Url}"
+frameborder="0"
+allowfullscreen>
+</iframe>
+
+</div>
+
+`;
+
+});
+
+html+="</div>";
+
+document.getElementById("content").innerHTML=html;
+
+}
+
+</script></body>
+</html>
