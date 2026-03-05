@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>معهد المنارة التعليمي</title>
-
-<style>
+<!DOCTYPE html><html lang="ar">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>معهد المنارة التعليمي</title><style>
 
 body{
 font-family:Arial;
@@ -19,11 +14,20 @@ header{
 background:#1e4fa3;
 color:white;
 padding:25px;
-font-size:26px;
 }
 
-section{
-padding:40px;
+.logo{
+width:120px;
+margin-bottom:10px;
+}
+
+.about{
+background:white;
+padding:20px;
+margin:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+line-height:1.8;
 }
 
 .cards{
@@ -31,6 +35,7 @@ display:flex;
 flex-direction:column;
 align-items:center;
 gap:20px;
+padding:20px;
 }
 
 .card{
@@ -47,40 +52,14 @@ cursor:pointer;
 background:#eef2ff;
 }
 
-.menu-btn{
-position:fixed;
-top:20px;
-left:20px;
-font-size:25px;
+.btn{
 background:#1e4fa3;
 color:white;
-border:none;
 padding:10px 15px;
 border-radius:6px;
-cursor:pointer;
-}
-
-.side-menu{
-position:fixed;
-left:-250px;
-top:0;
-width:250px;
-height:100%;
-background:#1e4fa3;
-padding-top:60px;
-transition:0.3s;
-}
-
-.side-menu a{
-display:block;
-color:white;
-padding:15px;
+margin:5px;
+display:inline-block;
 text-decoration:none;
-font-size:18px;
-}
-
-.side-menu a:hover{
-background:#163c80;
 }
 
 .whatsapp{
@@ -95,77 +74,26 @@ border-radius:50%;
 text-decoration:none;
 }
 
-</style>
-
-</head>
-
-<body>
-
-<header>
-معهد المنارة التعليمي
-</header>
-
-<button class="menu-btn" onclick="openMenu()">☰</button>
-
-<div id="sideMenu" class="side-menu">
-
-<a onclick="home()">الرئيسية</a>
-
-<a onclick="school()">المراحل المدرسية</a>
-
-<a onclick="university()">المرحلة الجامعية</a>
-
-<a href="https://wa.me/96551693563">تواصل معنا</a>
-
-</div>
-
-<section id="content">
-
-<h2>اختر القسم</h2>
-
-<div class="cards">
-
-<div class="card" onclick="school()">
+</style></head><body><header><img src="logo.png" class="logo"><h1>معهد المنارة التعليمي</h1></header><section id="content"><div class="about"><h2>نبذة عن المعهد</h2><p>
+معهد المنارة التعليمي يقدم دروس تقوية لجميع المراحل الدراسية
+من الصف الأول حتى المرحلة الجامعية.
+</p><p>
+نوفر أفضل المدرسين في جميع المواد مثل
+الرياضيات والفيزياء والكيمياء والأحياء
+واللغة العربية واللغة الإنجليزية والحاسوب.
+</p><p>
+هدفنا مساعدة الطالب على التفوق وتحقيق أفضل النتائج.
+</p></div><h2>اختر القسم</h2><div class="cards"><div class="card" onclick="school()">
 📚 المراحل المدرسية
-</div>
-
-<div class="card" onclick="university()">
+</div><div class="card" onclick="university()">
 🎓 المرحلة الجامعية
-</div>
-
-</div>
-
-</section>
-
-<a href="https://wa.me/96551693563" class="whatsapp">💬</a>
+</div></div></section><a href="https://wa.me/96551693563" class="whatsapp">💬</a>
 
 <script>
 
-function openMenu(){
-let menu=document.getElementById("sideMenu");
-
-if(menu.style.left=="0px"){
-menu.style.left="-250px";
-}else{
-menu.style.left="0px";
-}
-}
-
 function home(){
 
-document.getElementById("content").innerHTML=
-
-`
-<h2>اختر القسم</h2>
-
-<div class="cards">
-
-<div class="card" onclick="school()">📚 المراحل المدرسية</div>
-
-<div class="card" onclick="university()">🎓 المرحلة الجامعية</div>
-
-</div>
-`;
+location.reload()
 
 }
 
@@ -174,16 +102,87 @@ function school(){
 document.getElementById("content").innerHTML=
 
 `
-<h2>اختر نوع المدرسة</h2>
+<h2>اختر الصف</h2>
 
 <div class="cards">
 
-<div class="card">🏫 المدارس الحكومية</div>
-
-<div class="card">🎓 Private Schools</div>
+<div class="card" onclick="semester('الصف الأول')">الصف الأول</div>
+<div class="card" onclick="semester('الصف الثاني')">الصف الثاني</div>
+<div class="card" onclick="semester('الصف الثالث')">الصف الثالث</div>
+<div class="card" onclick="semester('الصف الرابع')">الصف الرابع</div>
+<div class="card" onclick="semester('الصف الخامس')">الصف الخامس</div>
+<div class="card" onclick="semester('الصف السادس')">الصف السادس</div>
+<div class="card" onclick="semester('الصف السابع')">الصف السابع</div>
+<div class="card" onclick="semester('الصف الثامن')">الصف الثامن</div>
+<div class="card" onclick="semester('الصف التاسع')">الصف التاسع</div>
+<div class="card" onclick="semester('الصف العاشر')">الصف العاشر</div>
+<div class="card" onclick="semester('الصف الحادي عشر')">الصف الحادي عشر</div>
+<div class="card" onclick="semester('الصف الثاني عشر')">الصف الثاني عشر</div>
 
 </div>
-`;
+`
+
+}
+
+function semester(grade){
+
+document.getElementById("content").innerHTML=
+
+`
+<h2>${grade}</h2>
+
+<div class="cards">
+
+<div class="card" onclick="subjects('${grade}','الفصل الأول')">
+الفصل الدراسي الأول
+</div>
+
+<div class="card" onclick="subjects('${grade}','الفصل الثاني')">
+الفصل الدراسي الثاني
+</div>
+
+</div>
+`
+
+}
+
+function subjects(grade,sem){
+
+let materials=[
+"اللغة العربية",
+"اللغة الإنجليزية",
+"الرياضيات",
+"العلوم",
+"الاجتماعيات",
+"الحاسوب",
+"التربية الإسلامية"
+]
+
+let html=`<h2>${grade} - ${sem}</h2><div class="cards">`
+
+materials.forEach(function(m){
+
+html+=`
+<div class="card">
+
+<h3>${m}</h3>
+
+<a class="btn" href="https://wa.me/96551693563?text=اريد حجز حصة ${m} ${grade}">
+👨‍🏫 حجز حصة
+</a>
+
+<a class="btn" href="#">
+🎥 مشاهدة فيديو
+</a>
+
+</div>
+`
+
+})
+
+html+=`</div>`
+
+document.getElementById("content").innerHTML=html
 
 }
 
@@ -203,11 +202,9 @@ document.getElementById("content").innerHTML=
 <div class="card">الجامعة الاسترالية</div>
 
 </div>
-`;
+`
 
 }
 
-</script>
-
-</body>
+</script></body>
 </html>
