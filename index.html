@@ -1,12 +1,20 @@
-<!DOCTYPE html><html lang="ar"><head>
-<meta charset="UTF-8">
+<!DOCTYPE html><html lang="ar"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>معهد المنارة التعليمي</title><style>body{
+<title>معهد المنارة التعليمي</title><style>
+
+body{
 font-family:Arial;
 margin:0;
-background:#f4f6f9;
 text-align:center;
 direction:rtl;
+
+/* Watermark */
+background-image:url("logo.png");
+background-repeat:no-repeat;
+background-position:center;
+background-size:60%;
+background-attachment:fixed;
+background-color:#f4f6f9;
 }
 
 header{
@@ -15,9 +23,9 @@ color:white;
 padding:25px;
 }
 
+/* اللوجو يملي العرض */
 .logo{
 width:100%;
-  max-width:500px;
 margin-bottom:10px;
 }
 
@@ -86,9 +94,9 @@ text-decoration:none;
 /* أزرار التنقل */
 .nav{
 position:fixed;
-top:15px;
-left:15px;
-z-index:999;
+top:10px;
+left:10px;
+z-index:9999;
 }
 
 .nav span{
@@ -104,14 +112,9 @@ font-size:14px;
 </style></head><body><div class="nav">
 <span onclick="goBack()">⬅ رجوع</span>
 <span onclick="home()">🏠 الرئيسية</span>
-
-</div><header>
-<img src="logo.png" class="logo">
-<h1>معهد المنارة التعليمي</h1>
-  <p style="margin-top:10px;font-size:18px;color:white">
+</div><header><img src="logo.png" class="logo"><h1>معهد المنارة التعليمي</h1><p style="margin-top:10px;font-size:18px;color:white">
 ✨ نضيء طريق التفوق
-  </p>
-</header><section id="content"><div class="about"><h2>نبذة عن المعهد</h2><p>
+</p></header><section id="content"><div class="about"><h2>نبذة عن المعهد</h2><p>
 معهد المنارة التعليمي يقدم دروس تقوية لجميع المراحل الدراسية
 من الصف الأول حتى المرحلة الجامعية.
 </p><p>
@@ -125,7 +128,9 @@ font-size:14px;
 📚 المراحل المدرسية
 </div><div class="card" onclick="university()">
 🎓 المرحلة الجامعية
-</div></div></section><a href="https://wa.me/96551693563" class="whatsapp">💬</a><script>
+</div></div></section><a href="https://wa.me/96551693563" class="whatsapp">💬</a>
+
+<script>
 
 function home(){
 location.reload()
@@ -386,4 +391,5 @@ document.getElementById("content").innerHTML=
 
 }
 
-</script></body></html>
+</script></body>
+</html>
