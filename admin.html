@@ -9,15 +9,14 @@ font-family:Arial;
 background:#f4f6f9;
 text-align:center;
 direction:rtl;
-margin:0;
-padding:40px;
+padding:30px;
 }
 
 h1{
-margin-bottom:30px;
+margin-bottom:20px;
 }
 
-input{
+input,select{
 width:90%;
 max-width:400px;
 padding:12px;
@@ -30,10 +29,10 @@ font-size:16px;
 button{
 background:#1e4fa3;
 color:white;
-padding:12px 20px;
+padding:10px 18px;
 border:none;
-border-radius:8px;
-font-size:16px;
+border-radius:6px;
+margin:5px;
 cursor:pointer;
 }
 
@@ -41,25 +40,56 @@ button:hover{
 background:#163d82;
 }
 
+.videoCard{
+background:white;
+padding:15px;
+margin:15px auto;
+max-width:400px;
+border-radius:10px;
+box-shadow:0 0 8px rgba(0,0,0,0.1);
+}
+
 .msg{
-margin-top:20px;
-font-size:18px;
 color:green;
+font-size:18px;
 }
 
 </style></head>
-<body><h1>لوحة تحكم معهد المنارة</h1><input id="title" placeholder="اسم الدرس"><br>
-<input id="grade" placeholder="الصف"><br>
-<input id="semester" placeholder="الفصل"><br>
-<input id="subject" placeholder="المادة"><br>
-<input id="url" placeholder="رابط الفيديو embed"><br>
+<body><h1>لوحة تحكم معهد المنارة</h1><div id="login"><input id="pass" placeholder="ادخل كلمة السر">
+<br>
+<button onclick="login()">دخول</button></div><div id="panel" style="display:none"><input id="title" placeholder="اسم الدرس"><select id="grade">
+<option value="">اختر الصف</option>
+<option>الصف الأول</option>
+<option>الصف الثاني</option>
+<option>الصف الثالث</option>
+<option>الصف الرابع</option>
+<option>الصف الخامس</option>
+<option>الصف السادس</option>
+<option>الصف السابع</option>
+<option>الصف الثامن</option>
+<option>الصف التاسع</option>
+<option>الصف العاشر</option>
+<option>الصف الحادي عشر</option>
+<option>الصف الثاني عشر</option>
+</select><select id="semester">
+<option value="">اختر الفصل</option>
+<option>الفصل الأول</option>
+<option>الفصل الثاني</option>
+</select><select id="subject">
+<option value="">اختر المادة</option>
+<option>اللغة العربية</option>
+<option>اللغة الإنجليزية</option>
+<option>الرياضيات</option>
+<option>العلوم</option>
+<option>الاجتماعيات</option>
+<option>الحاسوب</option>
+<option>التربية الإسلامية</option>
+</select><input id="url" placeholder="رابط فيديو يوتيوب"><br><button onclick="addVideo()">إضافة الفيديو</button>
 
-<button onclick="addVideo()">إضافة الفيديو</button>
-
-<div id="msg" class="msg"></div><script type="module">
+<div id="msg" class="msg"></div><h2>الفيديوهات</h2><div id="videos"></div></div><script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
 
 const firebaseConfig = {
 apiKey: "AIzaSyAwWwFCuLQDCnWgSzqYqUrZZrXywN88MFg",
@@ -74,6 +104,40 @@ measurementId: "G-JK6QPGCJRE"
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+window.login=function(){
+
+let p=document.getElementById("pass").value
+
+if(p=="123456"){
+
+document.getElementById("login").style.display="none"
+document.getElementById("panel").style.display="block"
+loadVideos()
+
+}else{
+
+alert("كلمة السر خطأ")
+
+}
+
+}
+
+function convertYoutube(url){
+
+if(url.includes("youtu.be")){
+let id=url.split("/").pop()
+return "https://www.youtube.com/embed/"+id
+}
+
+if(url.includes("watch?v=")){
+let id=url.split("v=")[1]
+return "https://www.youtube.com/embed/"+id
+}
+
+return url
+
+}
+
 window.addVideo = async function(){
 
 let title=document.getElementById("title").value
@@ -81,6 +145,8 @@ let grade=document.getElementById("grade").value
 let semester=document.getElementById("semester").value
 let subject=document.getElementById("subject").value
 let url=document.getElementById("url").value
+
+url=convertYoutube(url)
 
 await addDoc(collection(db,"Videos"),{
 Title:title,
@@ -92,11 +158,69 @@ Url:url
 
 document.getElementById("msg").innerHTML="✅ تم إضافة الفيديو بنجاح"
 
-document.getElementById("title").value=""
-document.getElementById("grade").value=""
-document.getElementById("semester").value=""
-document.getElementById("subject").value=""
-document.getElementById("url").value=""
+loadVideos()
+
+}
+
+async function loadVideos(){
+
+const querySnapshot = await getDocs(collection(db,"Videos"))
+
+let html=""
+
+querySnapshot.forEach((d)=>{
+
+let data=d.data()
+
+html+=`
+
+<div class="videoCard">
+
+<h3>${data.Title}</h3>
+
+<iframe width="100%" height="200"
+src="${data.Url}"
+frameborder="0"
+allowfullscreen></iframe>
+
+<br>
+
+<button onclick="deleteVideo('${d.id}')">حذف</button>
+
+<button onclick="editVideo('${d.id}','${data.Title}','${data.Url}')">تعديل</button>
+
+</div>
+
+`
+
+})
+
+document.getElementById("videos").innerHTML=html
+
+}
+
+window.deleteVideo=async function(id){
+
+await deleteDoc(doc(db,"Videos",id))
+
+loadVideos()
+
+}
+
+window.editVideo=function(id,title,url){
+
+let newTitle=prompt("اسم الدرس",title)
+
+let newUrl=prompt("رابط الفيديو",url)
+
+updateDoc(doc(db,"Videos",id),{
+
+Title:newTitle,
+Url:newUrl
+
+})
+
+loadVideos()
 
 }
 
