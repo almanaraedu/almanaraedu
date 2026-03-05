@@ -85,15 +85,36 @@ border-radius:50%;
 text-decoration:none;
 }
 
-</style></head><body><header>
+/* أزرار التنقل */
+.nav{
+position:fixed;
+top:15px;
+left:15px;
+z-index:999;
+}
+
+.nav span{
+background:#1e4fa3;
+color:white;
+padding:8px 12px;
+border-radius:6px;
+margin:5px;
+cursor:pointer;
+font-size:14px;
+}
+
+</style></head><body><div class="nav">
+<span onclick="goBack()">⬅ رجوع</span>
+<span onclick="home()">🏠 الرئيسية</span>
+</div><header>
 <img src="logo.png" class="logo">
 <h1>معهد المنارة التعليمي</h1>
 </header><section id="content"><div class="about"><h2>نبذة عن المعهد</h2><p>
 معهد المنارة التعليمي يقدم دروس تقوية لجميع المراحل الدراسية
 من الصف الأول حتى المرحلة الجامعية.
 </p><p>
- نوفر أفضل المدرسين في جميع المواد
- لجميع المراحل وجميع التخصصات 
+نوفر أفضل المدرسين في جميع المواد
+لجميع المراحل وجميع التخصصات
 </p><p>
 هدفنا مساعدة الطالب على التفوق وتحقيق أفضل النتائج.
 </p></div><h2>اختر القسم</h2><div class="cards"><div class="card" onclick="register()">
@@ -108,6 +129,10 @@ text-decoration:none;
 
 function home(){
 location.reload()
+}
+
+function goBack(){
+window.history.back()
 }
 
 function register(){
@@ -235,7 +260,7 @@ html+=`
 👨‍🏫 حجز حصة
 </a>
 
-<a class="btn" href="#">
+<a class="btn" onclick="playVideo('https://www.youtube.com/embed/dQw4w9WgXcQ')">
 🎥 مشاهدة فيديو
 </a>
 
@@ -253,6 +278,30 @@ html+=`</div>
 `
 
 document.getElementById("content").innerHTML=html
+
+}
+
+function playVideo(url){
+
+document.getElementById("content").innerHTML=
+
+`
+<h2>فيديو الشرح</h2>
+
+<div style="padding:20px">
+
+<iframe width="100%" height="300"
+src="${url}"
+frameborder="0"
+allowfullscreen>
+</iframe>
+
+<br><br>
+
+<div class="btn" onclick="home()">🏠 الصفحة الرئيسية</div>
+
+</div>
+`
 
 }
 
