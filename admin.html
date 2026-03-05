@@ -1,0 +1,106 @@
+<!DOCTYPE html><html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>لوحة تحكم معهد المنارة</title><style>
+
+body{
+font-family:Arial;
+background:#f4f6f9;
+text-align:center;
+direction:rtl;
+padding:40px;
+}
+
+input{
+padding:10px;
+margin:10px;
+width:300px;
+border-radius:6px;
+border:1px solid #ccc;
+}
+
+button{
+padding:10px 20px;
+background:#1e4fa3;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+</style></head><body><div id="login"><h2>دخول لوحة التحكم</h2><input id="password" placeholder="ادخل الرقم السري"><br>
+
+<button onclick="login()">دخول</button>
+
+<p id="msg"></p></div><div id="panel" style="display:none"><h2>لوحة تحكم معهد المنارة</h2><input id="title" placeholder="عنوان الفيديو"><br>
+
+<input id="grade" placeholder="الصف مثال: الصف الأول"><br>
+
+<input id="semester" placeholder="الفصل مثال: الفصل الأول"><br>
+
+<input id="subject" placeholder="المادة مثال: الرياضيات"><br>
+
+<input id="url" placeholder="رابط فيديو embed"><br>
+
+<button onclick="addVideo()">إضافة الفيديو</button>
+
+<p id="msg2"></p></div><script>
+
+function login(){
+
+let pass=document.getElementById("password").value
+
+if(pass==="12345"){
+
+document.getElementById("login").style.display="none"
+document.getElementById("panel").style.display="block"
+
+}else{
+
+document.getElementById("msg").innerHTML="❌ الرقم السري خطأ"
+
+}
+
+}
+
+</script><script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyAwWwFCuLQDCnWgSzqYqUrZZrXywN88MFg",
+authDomain: "almanara-edu.firebaseapp.com",
+projectId: "almanara-edu",
+storageBucket: "almanara-edu.firebasestorage.app",
+messagingSenderId: "755423201331",
+appId: "1:755423201331:web:957e58dcccc796d8513b46"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.addVideo = async function(){
+
+let title=document.getElementById("title").value
+let grade=document.getElementById("grade").value
+let semester=document.getElementById("semester").value
+let subject=document.getElementById("subject").value
+let url=document.getElementById("url").value
+
+await addDoc(collection(db,"Videos"),{
+
+Title:title,
+grade:grade,
+semester:semester,
+subject:subject,
+Url:url
+
+})
+
+document.getElementById("msg2").innerHTML="✅ تم إضافة الفيديو"
+
+}
+
+</script></body>
+</html>
