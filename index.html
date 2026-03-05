@@ -105,9 +105,7 @@ font-size:14px;
 </style></head><body><div class="nav">
 <span onclick="goBack()">⬅ رجوع</span>
 <span onclick="home()">🏠 الرئيسية</span>
-</div><header>
-<img src="logo.png" class="logo">
-<h1>معهد المنارة التعليمي</h1><p style="margin-top:10px;font-size:18px;color:white">
+</div><header><img src="logo.png" class="logo"><h1>معهد المنارة التعليمي</h1><p style="margin-top:10px;font-size:18px;color:white">
 ✨ نضيء طريق التفوق
 </p></header><section id="content"><div class="about"><h2>نبذة عن المعهد</h2><p>
 معهد المنارة التعليمي يقدم دروس تقوية لجميع المراحل الدراسية
@@ -325,9 +323,7 @@ html+=`
 })
 
 html+=`</div>
-
 <br>
-
 <div class="btn" onclick="semester('${grade}')">⬅ رجوع</div>
 `
 
@@ -335,25 +331,62 @@ document.getElementById("content").innerHTML=html
 
 }
 
-function university(){
+</script><script type="module">
 
-document.getElementById("content").innerHTML=
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
 
-`
-<h2>المرحلة الجامعية</h2>
+const firebaseConfig = {
+apiKey: "AIzaSyAwWwFCuLQDCnWgSzqYqUrZZrXywN88MFg",
+authDomain: "almanara-edu.firebaseapp.com",
+projectId: "almanara-edu",
+storageBucket: "almanara-edu.firebasestorage.app",
+messagingSenderId: "755423201331",
+appId: "1:755423201331:web:957e58dcccc796d8513b46"
+};
 
-<div class="cards">
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-<div class="card">التطبيقي</div>
-<div class="card">جامعة الكويت</div>
-<div class="card">الجامعة الاسترالية</div>
+window.loadVideos = async function(grade,sem,subject){
+
+const querySnapshot = await getDocs(collection(db,"Videos"));
+
+let html = `<h2>فيديوهات ${subject}</h2><div class="cards">`;
+
+querySnapshot.forEach((doc)=>{
+
+const data = doc.data();
+
+if(
+data.grade === grade &&
+data.semester === sem &&
+data.subject === subject
+){
+
+html+=`
+
+<div class="card">
+
+<h3>${data.Title}</h3>
+
+<iframe width="100%" height="200"
+src="${data.Url}"
+frameborder="0"
+allowfullscreen>
+</iframe>
 
 </div>
 
-<br>
-
-<div class="btn" onclick="home()">⬅ رجوع</div>
 `
+
+}
+
+})
+
+html+="</div>";
+
+document.getElementById("content").innerHTML=html;
 
 }
 
