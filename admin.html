@@ -1,10 +1,7 @@
-<!DOCTYPE html><html lang="ar">
-<head>
+<!DOCTYPE html><html lang="ar"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>لوحة تحكم معهد المنارة</title>
-
-<style>
+<title>لوحة تحكم معهد المنارة</title><style>
 
 body{
 font-family:Arial;
@@ -57,27 +54,15 @@ font-size:18px;
 margin-top:10px;
 }
 
-</style>
+.error{
+color:red;
+font-size:16px;
+margin-top:5px;
+}
 
-</head>
-
-<body>
-
-<h1>لوحة تحكم معهد المنارة</h1>
-
-<div id="login">
-
-<input id="pass" placeholder="ادخل كلمة السر">
+</style></head><body><h1>لوحة تحكم معهد المنارة</h1><div id="login"><input id="pass" placeholder="ادخل كلمة السر">
 <br>
-<button onclick="login()">دخول</button>
-
-</div>
-
-<div id="panel" style="display:none">
-
-<input id="title" placeholder="اسم الدرس">
-
-<select id="grade">
+<button onclick="login()">دخول</button></div><div id="panel" style="display:none"><input id="title" placeholder="اسم الدرس"><select id="grade">
 <option value="">اختر الصف</option>
 <option>الصف الأول</option>
 <option>الصف الثاني</option>
@@ -91,15 +76,11 @@ margin-top:10px;
 <option>الصف العاشر</option>
 <option>الصف الحادي عشر</option>
 <option>الصف الثاني عشر</option>
-</select>
-
-<select id="semester">
+</select><select id="semester">
 <option value="">اختر الفصل</option>
 <option>الفصل الأول</option>
 <option>الفصل الثاني</option>
-</select>
-
-<select id="subject">
+</select><select id="subject">
 <option value="">اختر المادة</option>
 <option>اللغة العربية</option>
 <option>اللغة الإنجليزية</option>
@@ -108,33 +89,14 @@ margin-top:10px;
 <option>الاجتماعيات</option>
 <option>الحاسوب</option>
 <option>التربية الإسلامية</option>
-</select>
-
-<input id="url" placeholder="رابط فيديو يوتيوب">
-
-<br>
-
-<input type="file" id="videoFile" accept="video/*">
-
-<br>
-
-<button onclick="addVideo()">إضافة الفيديو</button>
+</select><input id="url" placeholder="رابط فيديو يوتيوب"><br><input type="file" id="videoFile" accept="video/*"><br><button onclick="addVideo()">إضافة الفيديو</button>
 
 <div id="msg" class="msg"></div>
-
-<h2>الفيديوهات</h2>
-
-<div id="videos"></div>
-
-</div>
-
-<script type="module">
+<div id="error" class="error"></div><h2>الفيديوهات</h2><div id="videos"></div></div><script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
-
-import { getStorage, ref, uploadBytes, getDownloadURL }
-from "https://www.gstatic.com/firebasejs/12.10.0/firebase-storage.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-storage.js";
 
 const firebaseConfig = {
 apiKey: "AIzaSyAwWwFCuLQDCnWgSzqYqUrZZrXywN88MFg",
@@ -191,8 +153,37 @@ let grade=document.getElementById("grade").value
 let semester=document.getElementById("semester").value
 let subject=document.getElementById("subject").value
 let url=document.getElementById("url").value
-
 let file=document.getElementById("videoFile").files[0]
+
+document.getElementById("msg").innerHTML=""
+document.getElementById("error").innerHTML=""
+
+if(!title){
+document.getElementById("error").innerHTML="⚠️ اكتب اسم الدرس"
+return
+}
+
+if(!grade){
+document.getElementById("error").innerHTML="⚠️ اختر الصف"
+return
+}
+
+if(!semester){
+document.getElementById("error").innerHTML="⚠️ اختر الفصل الدراسي"
+return
+}
+
+if(!subject){
+document.getElementById("error").innerHTML="⚠️ اختر المادة"
+return
+}
+
+if(!url && !file){
+document.getElementById("error").innerHTML="⚠️ ضع رابط فيديو أو اختر فيديو من الجهاز"
+return
+}
+
+try{
 
 if(file){
 
@@ -216,13 +207,19 @@ subject:subject,
 Url:url
 })
 
-document.getElementById("msg").innerHTML="✅ تم إضافة الفيديو بنجاح"
+document.getElementById("msg").innerHTML="✅ تم رفع الفيديو بنجاح"
 
 document.getElementById("title").value=""
 document.getElementById("url").value=""
 document.getElementById("videoFile").value=""
 
 loadVideos()
+
+}catch(e){
+
+document.getElementById("error").innerHTML="❌ حدث خطأ أثناء رفع الفيديو"
+
+}
 
 }
 
@@ -250,7 +247,6 @@ allowfullscreen></iframe>
 <br>
 
 <button onclick="deleteVideo('${d.id}')">حذف</button>
-
 <button onclick="editVideo('${d.id}','${data.Title}','${data.Url}')">تعديل</button>
 
 </div>
@@ -266,7 +262,6 @@ document.getElementById("videos").innerHTML=html
 window.deleteVideo=async function(id){
 
 await deleteDoc(doc(db,"Videos",id))
-
 loadVideos()
 
 }
@@ -277,17 +272,13 @@ let newTitle=prompt("اسم الدرس",title)
 let newUrl=prompt("رابط الفيديو",url)
 
 updateDoc(doc(db,"Videos",id),{
-
 Title:newTitle,
 Url:newUrl
-
 })
 
 loadVideos()
 
 }
 
-</script>
-
-</body>
+</script></body>
 </html>
