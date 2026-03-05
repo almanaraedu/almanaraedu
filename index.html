@@ -1,10 +1,7 @@
-<!DOCTYPE html><html lang="ar">
-<head>
+<!DOCTYPE html><html lang="ar"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>معهد المنارة التعليمي</title><style>
-
-body{
+<title>معهد المنارة التعليمي</title><style>body{
 font-family:Arial;
 margin:0;
 background:#f4f6f9;
@@ -106,6 +103,7 @@ font-size:14px;
 </style></head><body><div class="nav">
 <span onclick="goBack()">⬅ رجوع</span>
 <span onclick="home()">🏠 الرئيسية</span>
+
 </div><header>
 <img src="logo.png" class="logo">
 <h1>معهد المنارة التعليمي</h1>
@@ -123,9 +121,7 @@ font-size:14px;
 📚 المراحل المدرسية
 </div><div class="card" onclick="university()">
 🎓 المرحلة الجامعية
-</div></div></section><a href="https://wa.me/96551693563" class="whatsapp">💬</a>
-
-<script>
+</div></div></section><a href="https://wa.me/96551693563" class="whatsapp">💬</a><script>
 
 function home(){
 location.reload()
@@ -182,7 +178,33 @@ function school(){
 document.getElementById("content").innerHTML=
 
 `
-<h2>اختر الصف</h2>
+<h2>اختر نوع المدرسة</h2>
+
+<div class="cards">
+
+<div class="card" onclick="government()">
+🏫 المدارس الحكومية
+</div>
+
+<div class="card" onclick="privateSchools()">
+🎓 المدارس الخاصة
+</div>
+
+</div>
+
+<br>
+
+<div class="btn" onclick="home()">⬅ رجوع</div>
+`
+
+}
+
+function government(){
+
+document.getElementById("content").innerHTML=
+
+`
+<h2>المدارس الحكومية</h2>
 
 <div class="cards">
 
@@ -203,7 +225,38 @@ document.getElementById("content").innerHTML=
 
 <br>
 
-<div class="btn" onclick="home()">⬅ رجوع</div>
+<div class="btn" onclick="school()">⬅ رجوع</div>
+`
+
+}
+
+function privateSchools(){
+
+document.getElementById("content").innerHTML=
+
+`
+<h2>المدارس الخاصة</h2>
+
+<div class="cards">
+
+<div class="card" onclick="semester('Grade 1')">Grade 1</div>
+<div class="card" onclick="semester('Grade 2')">Grade 2</div>
+<div class="card" onclick="semester('Grade 3')">Grade 3</div>
+<div class="card" onclick="semester('Grade 4')">Grade 4</div>
+<div class="card" onclick="semester('Grade 5')">Grade 5</div>
+<div class="card" onclick="semester('Grade 6')">Grade 6</div>
+<div class="card" onclick="semester('Grade 7')">Grade 7</div>
+<div class="card" onclick="semester('Grade 8')">Grade 8</div>
+<div class="card" onclick="semester('Grade 9')">Grade 9</div>
+<div class="card" onclick="semester('Grade 10')">Grade 10</div>
+<div class="card" onclick="semester('Grade 11')">Grade 11</div>
+<div class="card" onclick="semester('Grade 12')">Grade 12</div>
+
+</div>
+
+<br>
+
+<div class="btn" onclick="school()">⬅ رجوع</div>
 `
 
 }
@@ -329,5 +382,4 @@ document.getElementById("content").innerHTML=
 
 }
 
-</script></body>
-</html>
+</script></body></html>
