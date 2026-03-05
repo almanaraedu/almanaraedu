@@ -1,6 +1,7 @@
 <!DOCTYPE html><html lang="ar">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>لوحة تحكم معهد المنارة</title><style>
 
 body{
@@ -8,62 +9,54 @@ font-family:Arial;
 background:#f4f6f9;
 text-align:center;
 direction:rtl;
+margin:0;
 padding:40px;
 }
 
+h1{
+margin-bottom:30px;
+}
+
 input{
-padding:10px;
+width:90%;
+max-width:400px;
+padding:12px;
 margin:10px;
-width:300px;
-border-radius:6px;
+border-radius:8px;
 border:1px solid #ccc;
+font-size:16px;
 }
 
 button{
-padding:10px 20px;
 background:#1e4fa3;
 color:white;
+padding:12px 20px;
 border:none;
-border-radius:6px;
+border-radius:8px;
+font-size:16px;
 cursor:pointer;
 }
 
-</style></head><body><div id="login"><h2>دخول لوحة التحكم</h2><input id="password" placeholder="ادخل الرقم السري"><br>
+button:hover{
+background:#163d82;
+}
 
-<button onclick="login()">دخول</button>
+.msg{
+margin-top:20px;
+font-size:18px;
+color:green;
+}
 
-<p id="msg"></p></div><div id="panel" style="display:none"><h2>لوحة تحكم معهد المنارة</h2><input id="title" placeholder="عنوان الفيديو"><br>
-
-<input id="grade" placeholder="الصف مثال: الصف الأول"><br>
-
-<input id="semester" placeholder="الفصل مثال: الفصل الأول"><br>
-
-<input id="subject" placeholder="المادة مثال: الرياضيات"><br>
-
-<input id="url" placeholder="رابط فيديو embed"><br>
+</style></head>
+<body><h1>لوحة تحكم معهد المنارة</h1><input id="title" placeholder="اسم الدرس"><br>
+<input id="grade" placeholder="الصف"><br>
+<input id="semester" placeholder="الفصل"><br>
+<input id="subject" placeholder="المادة"><br>
+<input id="url" placeholder="رابط الفيديو embed"><br>
 
 <button onclick="addVideo()">إضافة الفيديو</button>
 
-<p id="msg2"></p></div><script>
-
-function login(){
-
-let pass=document.getElementById("password").value
-
-if(pass==="12345"){
-
-document.getElementById("login").style.display="none"
-document.getElementById("panel").style.display="block"
-
-}else{
-
-document.getElementById("msg").innerHTML="❌ الرقم السري خطأ"
-
-}
-
-}
-
-</script><script type="module">
+<div id="msg" class="msg"></div><script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
@@ -74,7 +67,8 @@ authDomain: "almanara-edu.firebaseapp.com",
 projectId: "almanara-edu",
 storageBucket: "almanara-edu.firebasestorage.app",
 messagingSenderId: "755423201331",
-appId: "1:755423201331:web:957e58dcccc796d8513b46"
+appId: "1:755423201331:web:957e58dcccc796d8513b46",
+measurementId: "G-JK6QPGCJRE"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -89,16 +83,20 @@ let subject=document.getElementById("subject").value
 let url=document.getElementById("url").value
 
 await addDoc(collection(db,"Videos"),{
-
 Title:title,
 grade:grade,
 semester:semester,
 subject:subject,
 Url:url
-
 })
 
-document.getElementById("msg2").innerHTML="✅ تم إضافة الفيديو"
+document.getElementById("msg").innerHTML="✅ تم إضافة الفيديو بنجاح"
+
+document.getElementById("title").value=""
+document.getElementById("grade").value=""
+document.getElementById("semester").value=""
+document.getElementById("subject").value=""
+document.getElementById("url").value=""
 
 }
 
