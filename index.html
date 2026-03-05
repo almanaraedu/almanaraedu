@@ -1,6 +1,8 @@
 <!DOCTYPE html><html lang="ar">
-<head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>معهد المنارة التعليمي</title><style>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>معهد المنارة التعليمي</title><style>
 
 body{
 font-family:Arial;
@@ -60,6 +62,15 @@ border-radius:6px;
 margin:5px;
 display:inline-block;
 text-decoration:none;
+cursor:pointer;
+}
+
+input{
+padding:10px;
+margin:10px;
+width:80%;
+border-radius:8px;
+border:1px solid #ccc;
 }
 
 .whatsapp{
@@ -74,7 +85,10 @@ border-radius:50%;
 text-decoration:none;
 }
 
-</style></head><body><header><img src="logo.png" class="logo"><h1>معهد المنارة التعليمي</h1></header><section id="content"><div class="about"><h2>نبذة عن المعهد</h2><p>
+</style></head><body><header>
+<img src="logo.png" class="logo">
+<h1>معهد المنارة التعليمي</h1>
+</header><section id="content"><div class="about"><h2>نبذة عن المعهد</h2><p>
 معهد المنارة التعليمي يقدم دروس تقوية لجميع المراحل الدراسية
 من الصف الأول حتى المرحلة الجامعية.
 </p><p>
@@ -83,7 +97,9 @@ text-decoration:none;
 واللغة العربية واللغة الإنجليزية والحاسوب.
 </p><p>
 هدفنا مساعدة الطالب على التفوق وتحقيق أفضل النتائج.
-</p></div><h2>اختر القسم</h2><div class="cards"><div class="card" onclick="school()">
+</p></div><h2>اختر القسم</h2><div class="cards"><div class="card" onclick="register()">
+📝 تسجيل طالب جديد
+</div><div class="card" onclick="school()">
 📚 المراحل المدرسية
 </div><div class="card" onclick="university()">
 🎓 المرحلة الجامعية
@@ -92,8 +108,48 @@ text-decoration:none;
 <script>
 
 function home(){
-
 location.reload()
+}
+
+function register(){
+
+document.getElementById("content").innerHTML=
+
+`
+<h2>تسجيل طالب</h2>
+
+<input id="name" placeholder="اسم الطالب"><br>
+
+<input id="grade" placeholder="الصف الدراسي"><br>
+
+<input id="subject" placeholder="المادة"><br>
+
+<input id="phone" placeholder="رقم الهاتف"><br>
+
+<div class="btn" onclick="send()">إرسال الطلب</div>
+
+<br>
+
+<div class="btn" onclick="home()">⬅ رجوع</div>
+`
+
+}
+
+function send(){
+
+let name=document.getElementById("name").value
+let grade=document.getElementById("grade").value
+let subject=document.getElementById("subject").value
+let phone=document.getElementById("phone").value
+
+let msg=
+"طلب تسجيل طالب جديد%0A"+
+"الاسم: "+name+"%0A"+
+"الصف: "+grade+"%0A"+
+"المادة: "+subject+"%0A"+
+"الهاتف: "+phone
+
+window.open("https://wa.me/96551693563?text="+msg)
 
 }
 
@@ -120,6 +176,10 @@ document.getElementById("content").innerHTML=
 <div class="card" onclick="semester('الصف الثاني عشر')">الصف الثاني عشر</div>
 
 </div>
+
+<br>
+
+<div class="btn" onclick="home()">⬅ رجوع</div>
 `
 
 }
@@ -142,6 +202,10 @@ document.getElementById("content").innerHTML=
 </div>
 
 </div>
+
+<br>
+
+<div class="btn" onclick="school()">⬅ رجوع</div>
 `
 
 }
@@ -163,6 +227,7 @@ let html=`<h2>${grade} - ${sem}</h2><div class="cards">`
 materials.forEach(function(m){
 
 html+=`
+
 <div class="card">
 
 <h3>${m}</h3>
@@ -176,11 +241,17 @@ html+=`
 </a>
 
 </div>
+
 `
 
 })
 
-html+=`</div>`
+html+=`</div>
+
+<br>
+
+<div class="btn" onclick="semester('${grade}')">⬅ رجوع</div>
+`
 
 document.getElementById("content").innerHTML=html
 
@@ -202,6 +273,10 @@ document.getElementById("content").innerHTML=
 <div class="card">الجامعة الاسترالية</div>
 
 </div>
+
+<br>
+
+<div class="btn" onclick="home()">⬅ رجوع</div>
 `
 
 }
